@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+ public enum e_Pieza { CABALLO1 = 2, CABALLO2, TORRE1, TORRE2, ALFIL1, ALFIL2, REINA, REY };
+
+namespace tp_2_labo_prueba
+
+{
+    public class Pieza
+    {
+        
+        public cPosicion pos;
+        public e_Pieza tipoPieza;
+        public Pieza(e_Pieza tipo_pieza)
+        {
+            pos = new cPosicion();
+            tipoPieza = tipo_pieza;
+        }
+
+    }
+}
