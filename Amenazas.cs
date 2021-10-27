@@ -278,7 +278,6 @@ namespace tp_2_labo_prueba
 
             return pos;//seria -1, podemos tirar excepcion?
         }
-  
         public void AmenazasMovimientoRey(int[,] Amz_x_Cas, int[,] pos_piezas, Pieza pieza, bool sumar)
         {
             for (int i = 0; i < 8; i++)
@@ -444,6 +443,7 @@ namespace tp_2_labo_prueba
                 }
             }
         }
+        //HACER AMENAZAS FATALES
 
     }
 }

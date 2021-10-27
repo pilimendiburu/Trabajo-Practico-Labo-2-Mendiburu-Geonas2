@@ -13,6 +13,8 @@ namespace tp_2_labo_prueba
         Amenazas casillas_amenazadas;
         cTablero pos_piezas;
         Amenazas cant_amenazasxCasillas;
+        //int[,] cuartoTablero=new int[4,4];
+
         public Pieza[] arrayPiezas;
         public void GenerarTableros()
         {
@@ -175,6 +177,163 @@ namespace tp_2_labo_prueba
                 }
             }
         }
+        public int[,] LlenarCuartoTablero(int cuarto)
+        {
+            int[,] cuartoTablero = new int[4, 4];
+            for(int i=0;i<4;i++)
+            {
+                for(int j=0;j<4; i++)
+                {
+                    cuartoTablero[i, j] = 0;
+                }
+            }
+            switch(cuarto)
+            {
+                case 1:
+                    {
+                        for (int i = 0; i < cuartoTablero.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < cuartoTablero.GetLength(1); j++)
+                            {
+                                cuartoTablero[i, j] = pos_piezas.tablero[i, j];
+                            }
+                        }
+                        return cuartoTablero;
+                        break;
+                    }                 
+                case 2://2ndo cuarto
+                    {
+                        for (int i = 0; i < cuartoTablero.GetLength(0); i++)
+                        {
+                            for (int j = 4; j < 4+cuartoTablero.GetLength(1); j++)
+                            {
+                                cuartoTablero[i, j-4] = pos_piezas.tablero[i, j];
+                            }
+                        }
+                        return cuartoTablero;
+                        break;
+                    }
+                case 3://3ercuarto
+                    {
+                        for (int i = 4; i <4+ cuartoTablero.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < cuartoTablero.GetLength(1); j++)
+                            {
+                                cuartoTablero[i-4, j] = pos_piezas.tablero[i, j];
+                            }
+                        }
+                        return cuartoTablero;
+                        break;
+                    }
+                case 4:// 4to cuarto
+                    {
+                        for (int i = 4; i < 4 + cuartoTablero.GetLength(0); i++)
+                        {
+                            for (int j = 4; j <4+ cuartoTablero.GetLength(1); j++)
+                            {
+                                cuartoTablero[i - 4, j-4] = pos_piezas.tablero[i, j];
+                            }
+                        }
+                        return cuartoTablero;
+                        break;
+                    }
+                default:
+                    return cuartoTablero;
+            }
+          
+
+        }
+        public void IntercambiarCuartoTablero(int c1, int c2)
+        {
+            int[,] cuarto1 = new int[4, 4];
+            cuarto1 = LlenarCuartoTablero(c1);
+            int[,] cuarto2 = new int[4, 4];
+            cuarto2 = LlenarCuartoTablero(c2);
+            //RANGO:
+            int R1 = 0;
+            int R2 = 0;
+            switch (c1)
+            {
+                case 1:
+                    {
+                        R1 = 0;
+                        R2 = 0;
+                    }
+                    break;
+                case 2:
+                    {
+                        R1 = 0;
+                        R2 = 4;
+                    }
+                    break;
+                case 3:
+                    {
+                        R1 = 4;
+                        R2 = 0;
+                    }
+                    break;
+                case 4:
+                    {
+                        R1 = 4;
+                        R2 = 4;
+                    }
+                    break;
+
+                default:
+                    {
+                        Console.WriteLine("No existe ese cuarto de tablero");
+                    }
+                    break;
+            }
+            PegarCuartosEnMatriz_Sol(cuarto1, R1, R2);
+
+            switch (c2)
+            {
+                case 1:
+                    {
+                        R1 = 0;
+                        R2 = 0;
+                    }
+                    break;
+                case 2:
+                    {
+                        R1 = 0;
+                        R2 = 4;
+                    }
+                    break;
+                case 3:
+                    {
+                        R1 = 4;
+                        R2 = 0;
+                    }
+                    break;
+                case 4:
+                    {
+                        R1 = 4;
+                        R2 = 4;
+                    }
+                    break;
+
+                default:
+                    {
+                        Console.WriteLine("No existe ese cuarto de tablero");
+                    }
+                    break;
+            }
+            PegarCuartosEnMatriz_Sol(cuarto2, R1, R2);
+        }
+
+        public void PegarCuartosEnMatriz_Sol(int[,] cuarto, int R1, int R2)
+        {
+            for(int i=R1; i<R1+4; i++)
+            {
+                for(int j=R1; i<R2+4; i++)
+                {
+                    pos_piezas.tablero[i, j] = cuarto[i - R1, j - R2];
+                }
+            }
+        }
+          
     }
     
 }
