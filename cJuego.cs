@@ -134,17 +134,98 @@ namespace tp_2_labo_prueba
                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                 pos_piezas.ImprimirTablero();
                                 casillas_amenazadas.ImprimirTablero();
+                                IntercambiarCuartoTablero(1,2);
+                                cant_amenazasxCasillas.InicializarMatrizEn0();
+                                casillas_amenazadas.InicializarMatrizEn0();
+                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                {
+                                     cant_tab_generados++;
+                                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                     pos_piezas.ImprimirTablero();
+                                     casillas_amenazadas.ImprimirTablero();                                     
+                                }
+                                else
+                                {
+                                  IntercambiarCuartoTablero(2,3);
+                                  cant_amenazasxCasillas.InicializarMatrizEn0();
+                                  casillas_amenazadas.InicializarMatrizEn0();
+                                  casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                    if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                    {
+                                        cant_tab_generados++;                                        
+                                        Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                        pos_piezas.ImprimirTablero();
+                                        casillas_amenazadas.ImprimirTablero();                                       
+                                    }
+                                    else
+                                    {
+                                         IntercambiarCuartoTablero(3,4);
+                                         cant_amenazasxCasillas.InicializarMatrizEn0();
+                                         casillas_amenazadas.InicializarMatrizEn0();
+                                         casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                        if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                        {
+                                            cant_tab_generados++;
+                                            Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                            pos_piezas.ImprimirTablero();
+                                            casillas_amenazadas.ImprimirTablero();                                       
+                                        }
+                                        else
+                                        {
+                                            IntercambiarCuartoTablero(1,4);
+                                            cant_amenazasxCasillas.InicializarMatrizEn0();
+                                            casillas_amenazadas.InicializarMatrizEn0();
+                                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                            if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                            {
+                                                cant_tab_generados++;
+                                                Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                                pos_piezas.ImprimirTablero();
+                                                casillas_amenazadas.ImprimirTablero();
+                                      
+                                            }
+                                            else
+                                            {
+                                                IntercambiarCuartoTablero(1,3);
+                                                cant_amenazasxCasillas.InicializarMatrizEn0();
+                                                casillas_amenazadas.InicializarMatrizEn0();
+                                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                                if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                                {
+                                                     cant_tab_generados++;
+                                                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                                     pos_piezas.ImprimirTablero();
+                                                     casillas_amenazadas.ImprimirTablero();
+                                      
+                                                }
+                                                else
+                                                {
+                                                     IntercambiarCuartoTablero(4,2);
+                                                     cant_amenazasxCasillas.InicializarMatrizEn0();
+                                                     casillas_amenazadas.InicializarMatrizEn0();
+                                                     casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                                     if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                                     {
+                                                        cant_tab_generados++;
+                                                        Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                                        pos_piezas.ImprimirTablero();
+                                                        casillas_amenazadas.ImprimirTablero();
+                                        
+                                                     }
+                                                }
+                                            }
+                                        }
+                                    }                      
+                                }                       
                             }
                             else
                             {
                                 contador++;
                             }
                         }
-
                     }
                 }
-
-
             }
         }
         public cJuego()
@@ -322,7 +403,6 @@ namespace tp_2_labo_prueba
             }
             PegarCuartosEnMatriz_Sol(cuarto2, R1, R2);
         }
-
         public void PegarCuartosEnMatriz_Sol(int[,] cuarto, int R1, int R2)
         {
             for(int i=R1; i<R1+4; i++)
