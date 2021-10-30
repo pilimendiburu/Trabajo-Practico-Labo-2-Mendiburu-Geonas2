@@ -137,7 +137,7 @@ namespace tp_2_labo_prueba
                                 IntercambiarCuartoTablero(1,2);
                                 cant_amenazasxCasillas.InicializarMatrizEn0();
                                 casillas_amenazadas.InicializarMatrizEn0();
-                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                 if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                 {
                                      cant_tab_generados++;
@@ -150,7 +150,7 @@ namespace tp_2_labo_prueba
                                   IntercambiarCuartoTablero(2,3);
                                   cant_amenazasxCasillas.InicializarMatrizEn0();
                                   casillas_amenazadas.InicializarMatrizEn0();
-                                  casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                  casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                     if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                     {
                                         cant_tab_generados++;                                        
@@ -163,7 +163,7 @@ namespace tp_2_labo_prueba
                                          IntercambiarCuartoTablero(3,4);
                                          cant_amenazasxCasillas.InicializarMatrizEn0();
                                          casillas_amenazadas.InicializarMatrizEn0();
-                                         casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                         casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                         if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                         {
                                             cant_tab_generados++;
@@ -176,7 +176,7 @@ namespace tp_2_labo_prueba
                                             IntercambiarCuartoTablero(1,4);
                                             cant_amenazasxCasillas.InicializarMatrizEn0();
                                             casillas_amenazadas.InicializarMatrizEn0();
-                                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                             if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                             {
                                                 cant_tab_generados++;
@@ -190,7 +190,7 @@ namespace tp_2_labo_prueba
                                                 IntercambiarCuartoTablero(1,3);
                                                 cant_amenazasxCasillas.InicializarMatrizEn0();
                                                 casillas_amenazadas.InicializarMatrizEn0();
-                                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                                 if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                                 {
                                                      cant_tab_generados++;
@@ -204,7 +204,7 @@ namespace tp_2_labo_prueba
                                                      IntercambiarCuartoTablero(4,2);
                                                      cant_amenazasxCasillas.InicializarMatrizEn0();
                                                      casillas_amenazadas.InicializarMatrizEn0();
-                                                     casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas, pos_piezas,piezas, true);
+                                                     casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero,arrayPiezas, true);
                                                      if (casillas_amenazadas.casillas_no_amenazadas == 0)
                                                      {
                                                         cant_tab_generados++;
