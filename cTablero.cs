@@ -12,10 +12,9 @@ namespace tp_2_labo_prueba
 {
     public class cTablero
     {
-        public int[,] tablero = new int[8, 8];
-
+        public int[,] tablero = new int[8, 8];        
         //metodos:
-        
+
         public cPosicion LiberarPieza(int pieza) {
             cPosicion p_pieza = new cPosicion();
             for (int i = 0; i < 8; i++)

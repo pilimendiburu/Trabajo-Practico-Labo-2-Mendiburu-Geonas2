@@ -13,6 +13,7 @@ namespace tp_2_labo_prueba
         Amenazas casillas_amenazadas;
         cTablero pos_piezas;
         Amenazas cant_amenazasxCasillas;
+        cTablero matrizFatales;
         //int[,] cuartoTablero=new int[4,4];
 
         public Pieza[] arrayPiezas;
@@ -237,6 +238,7 @@ namespace tp_2_labo_prueba
             pos_piezas = new cTablero();
             cant_amenazasxCasillas = new Amenazas();
             arrayPiezas = new Pieza[8];//yo recibiria una por parametro
+            matrizFatales=new cTablero();
 
         }
         public void InicializarTableroAlfil()

@@ -12,12 +12,14 @@ namespace tp_2_labo_prueba
         public int casillas_no_amenazadas;
         public cPosicion pos_max_amenazas;
         public int max_amenazas;
+
         //char[,] ataques_fatales_y_leves = new char[8, 8];
         public Amenazas()
         {
             casillas_no_amenazadas = 0;
             pos_max_amenazas = new cPosicion();
             max_amenazas = (int)tablero[0, 0];
+
         }
         public void AmenazasMovimientoCaballos(int[,] Amz_x_Cas, int[,] pos_piezas, Pieza pieza, bool sumar) //necesito poner el numero por eso{ 
         {
@@ -284,7 +286,7 @@ namespace tp_2_labo_prueba
             {
                 for (int j = 0; j < 8; j++)
                 {
-     
+
                     if (pieza.pos.fila == i)
                     {
                         if (pieza.pos.columna - 1 == j || j == pieza.pos.columna + 1)
@@ -327,7 +329,7 @@ namespace tp_2_labo_prueba
                 }
 
             }
-            tablero[pieza.pos.fila, pieza.pos.columna] =(int) pieza.tipoPieza;
+            tablero[pieza.pos.fila, pieza.pos.columna] = (int)pieza.tipoPieza;
         }
         //public void BuscarYdesamenazar_porPieza(int[,] Amz_x_Cas, Pieza pieza, int[,] pos_piezas)
         //{
@@ -373,12 +375,11 @@ namespace tp_2_labo_prueba
         //            break;
         //    }
 
-      //  }
+        //  }
         public void AmenazarTablero(int[,] Amz_x_Cas, int[,] pos_piezas, Pieza[] piezas, bool sumar) {
-            
+
             for (int i = 0; i < 8; i++)
             {
-                
                 switch (piezas[i].tipoPieza)
                 {
                     case e_Pieza.CABALLO1:
@@ -444,6 +445,207 @@ namespace tp_2_labo_prueba
             }
         }
         //HACER AMENAZAS FATALES
+        void ataquesLevesyFatales(cTablero matriz_Fatales, cTablero pos_piezas, Pieza[] piezas)
+        {
+            //IDEA: rellenar matriz nueva 
+            //rellanar matriz_Fatales con funciones de amenazas de cada pieza HASTA encontrar un pieza en el tablero.
+            matriz_Fatales.InicializarMatrizEn0();
 
+            for (int i = 0; i < 8; i++)
+            {
+                switch (piezas[i].tipoPieza)
+                {
+                    case e_Pieza.CABALLO1:
+                        AmenazasFatalesCaballos(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.CABALLO2:
+                        AmenazasFatalesCaballos(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.TORRE1:
+                        AmenazasFatalesTorre(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.TORRE2:
+                        AmenazasFatalesTorre(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.ALFIL1:
+                        AmenazasFatalesAlfil(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.ALFIL2:
+                        AmenazasFatalesAlfil(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.REINA:
+                        AmenazasFatalesReina(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    case e_Pieza.REY:
+                        AmenazasFatalesRey(matriz_Fatales, pos_piezas, piezas[i]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
+        public void AmenazasFatalesCaballos(cTablero matriz_Fatales, cTablero pos_piezas, Pieza pieza) //necesito poner el numero por eso{ 
+        {
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (i == pieza.pos.fila)
+                        break;
+                    if ((i == (pieza.pos.fila + 2) && pieza.pos.columna + 1 == j) || (i == (pieza.pos.fila - 2) && (pieza.pos.columna + 1) == j))
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+                    }
+                    if ((pieza.pos.fila + 2 == i && j == pieza.pos.columna - 1) || (pieza.pos.fila - 2 == i && j == pieza.pos.columna - 1))
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+                    }
+                    if ((pieza.pos.fila + 1 == i && j == pieza.pos.columna + 2) || (pieza.pos.fila - 1 == i && j == pieza.pos.columna + 2))
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+                    }
+                    if ((pieza.pos.fila + 1 == i && j == pieza.pos.columna - 2) || (pieza.pos.fila - 1 == i && j == pieza.pos.columna - 2))
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+                    }
+
+                }
+            }
+            matriz_Fatales.tablero[pieza.pos.fila, pieza.pos.columna] = (int)pieza.tipoPieza;
+        }
+        public void AmenazasFatalesTorre(cTablero matriz_Fatales, cTablero pos_piezas, Pieza pieza)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if (i == pieza.pos.fila)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+                    }
+
+                }
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                if (i == pieza.pos.columna)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        while (pos_piezas.tablero[i, j] == 0)
+                            matriz_Fatales[i, j] = (int)pieza.tipoPieza;
+                    }
+                }
+            }
+        }
+        public void AmenazasFatalesAlfil(cTablero matriz_Fatales, cTablero pos_piezas, Pieza pieza)
+        {
+            int i = pieza.pos.fila;
+            int j = pieza.pos.columna;
+
+            while ((i >= 0 && j >= 0) && (i <= 7 && j <= 7))
+            {
+                while (pos_piezas.tablero[i, j] == 0)
+                {
+                    matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+
+                    i++;
+                    j++;
+                }
+            }
+            i = pieza.pos.fila;
+            j = pieza.pos.columna;
+            while ((i >= 0 && j >= 0) && (i <= 7 && j <= 7))
+            {
+                while (pos_piezas.tablero[i, j] == 0)
+                {
+                    matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+
+                    i--;
+                    j--;
+                }
+            }
+            i = pieza.pos.fila;
+            j = pieza.pos.columna;
+            while ((i >= 0 && j >= 0) && (i <= 7 && j <= 7))
+            {
+                while (pos_piezas.tablero[i, j] == 0)
+                {
+                    matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+
+                    i++;
+                    j--;
+                }
+            }
+            i = pieza.pos.fila;
+            j = pieza.pos.columna;
+            while ((i >= 0 && j >= 0) && (i <= 7 && j <= 7))
+            {
+
+                while (pos_piezas.tablero[i, j] == 0)
+                {
+                    matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
+
+                    i--;
+                    j++;
+                }
+            }
+        }
+        public void AmenazasFatalesReina(cTablero matriz_Fatales, cTablero pos_piezas, Pieza pieza)
+        {
+            AmenazasFatalesAlfil(matriz_Fatales, pos_piezas, pieza);
+            AmenazasFatalesTorre(matriz_Fatales, pos_piezas, pieza);
+        }
+        public void AmenazasFatalesRey(cTablero matriz_Fatales, cTablero pos_piezas, Pieza pieza)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+
+                    if (pieza.pos.fila == i)
+                    {
+                        if (pieza.pos.columna - 1 == j || j == pieza.pos.columna + 1)
+                        {
+
+                            while (pos_piezas.tablero[i, j] == 0)
+                            {
+                                matriz_Fatales.tablero[i,j] = (int)pieza.tipoPieza;
+                            }
+                        }
+                    }
+                    if (pieza.pos.columna == j)
+                    {
+                        if (pieza.pos.fila - 1 == i || i == pieza.pos.fila + 1)
+                        {
+                            while (pos_piezas.tablero[i, j] == 0)
+                            {
+                                matriz_Fatales.tablero[i,j] = (int)pieza.tipoPieza;
+                            }
+                        }
+                    }
+                    if (i == pieza.pos.fila + 1 || i == pieza.pos.fila - 1)
+                    {
+                        if (j == pieza.pos.columna + 1 || j == pieza.pos.columna - 1)
+                        {
+
+                            while (pos_piezas.tablero[i, j] == 0)
+                            {
+                                matriz_Fatales.tablero[i,j] = (int)pieza.tipoPieza;
+                            }
+                        }
+                    }
+                }
+
+            }
+            matriz_Fatales.tablero[pieza.pos.fila, pieza.pos.columna] = (int)pieza.tipoPieza;
+        }
     }
 }
