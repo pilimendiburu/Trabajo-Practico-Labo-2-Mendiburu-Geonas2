@@ -31,16 +31,22 @@ namespace tp_2_labo_prueba
                 //torre 1
                 arrayPiezas[2].pos.EleccionAlAzar();//elijo la posición de mi torre al azar.
                 casillas_amenazadas.AmenazasMovimientoTorre(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[2], true);//marco las amenazas
-                pos_piezas.tablero[arrayPiezas[2].pos.fila, arrayPiezas[2].pos.columna] = (int)arrayPiezas[2].tipoPieza;//marco la posicion en la matriz de posiciones
+                pos_piezas.tablero[arrayPiezas[2].pos.fila, arrayPiezas[2].pos.columna] = ((int)arrayPiezas[2].tipoPieza);//marco la posicion en la matriz de posiciones
 
                 //torre 2
                 cPosicion aux = new cPosicion();//creo una posicion auxiliar que uso para inicializar valores
-                aux = arrayPiezas[2].pos;//le cambie pq sino nunca entraba al while
-                while (pos_piezas.tablero[aux.fila, aux.columna] != 0 && aux.fila == arrayPiezas[2].pos.fila && arrayPiezas[2].pos.columna == aux.columna)
+                //aux = arrayPiezas[2].pos;//le cambie pq sino nunca entraba al while
+                aux.fila = (int)arrayPiezas[2].pos.fila;
+                aux.columna = (int)arrayPiezas[2].pos.columna;
+
+                while (pos_piezas.tablero[aux.fila, aux.columna] != 0 || aux.fila == arrayPiezas[2].pos.fila || arrayPiezas[2].pos.columna == aux.columna)
                 {
                     aux.EleccionAlAzar();//selecciono una posicion hasta que cumpla con los criterios que necesito
+
                 }
-                arrayPiezas[3].pos = aux;//igualo a esa posicion encontrada
+                arrayPiezas[3].pos.fila = (int)aux.fila;//igualo a esa posicion encontrada
+                arrayPiezas[3].pos.columna = (int)aux.columna;//igualo a esa posicion encontrada
+
                 pos_piezas.tablero[aux.fila, aux.columna] = 5;//torre2
                 casillas_amenazadas.AmenazasMovimientoTorre(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[3], true);
 
@@ -50,7 +56,9 @@ namespace tp_2_labo_prueba
                     aux.EleccionAlAzar();
                 }
                 pos_piezas.tablero[aux.fila, aux.columna] = 6;//alfil 1
-                arrayPiezas[4].pos = aux;
+                arrayPiezas[4].pos.fila = (int)aux.fila;
+                arrayPiezas[4].pos.columna = (int)aux.columna;
+
                 casillas_amenazadas.AmenazasMovimientoAlfil(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[4], true);
 
                 //alfil 2
@@ -59,7 +67,9 @@ namespace tp_2_labo_prueba
                     aux.EleccionAlAzar();
                 }
                 pos_piezas.tablero[aux.fila, aux.columna] = 7;//alfil 2
-                arrayPiezas[5].pos = aux;
+                arrayPiezas[5].pos.fila =(int)aux.fila;
+                arrayPiezas[5].pos.columna = (int)aux.columna;
+
                 casillas_amenazadas.AmenazasMovimientoAlfil(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[5], true);
 
                 //reina
@@ -72,7 +82,9 @@ namespace tp_2_labo_prueba
                     aux.EleccionAlAzar();
                 }
                 pos_piezas.tablero[aux.fila, aux.columna] = 8;
-                arrayPiezas[6].pos = aux; 
+                arrayPiezas[6].pos.fila = aux.fila;
+                arrayPiezas[6].pos.columna = aux.columna;
+
                 casillas_amenazadas.AmenazasMovimientoReina(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[6], true);
 
                 //para que no me salte un -1 chequeo que hayan posiciones libres
@@ -88,17 +100,23 @@ namespace tp_2_labo_prueba
                 {
                     //posicione todas las casillas al azar, ahora tengo que colocar donde encuentre una posicion vacia
                     //caballo1
-                    arrayPiezas[0].pos = cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero);//pongo el caballo 1
+                    arrayPiezas[0].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;//pongo el caballo 1
+                    arrayPiezas[0].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;//pongo el caballo 1
+
                     pos_piezas.tablero[arrayPiezas[0].pos.fila, arrayPiezas[0].pos.columna] = 2;
                     casillas_amenazadas.AmenazasMovimientoCaballos(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[0], true);
 
                     //caballo2
-                    arrayPiezas[1].pos = cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero);
+                    arrayPiezas[1].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;
+                    arrayPiezas[1].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;
+
                     pos_piezas.tablero[arrayPiezas[1].pos.fila, arrayPiezas[1].pos.columna] = 3;
                     casillas_amenazadas.AmenazasMovimientoCaballos(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[1], true);
 
                     //rey
-                    arrayPiezas[7].pos = cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero);
+                    arrayPiezas[7].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;
+                    arrayPiezas[7].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;
+
                     pos_piezas.tablero[arrayPiezas[7].pos.fila, arrayPiezas[7].pos.columna] = 9;
                     casillas_amenazadas.AmenazasMovimientoRey(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[7], true);
 
@@ -120,8 +138,10 @@ namespace tp_2_labo_prueba
                             //Busco la poscion mas amenazada
                             cant_amenazasxCasillas.retornoMax();
                             int max = casillas_amenazadas.tablero[cant_amenazasxCasillas.pos_max_amenazas.fila, cant_amenazasxCasillas.pos_max_amenazas.columna];//el valor de la pieza en el mas amenazas
-                                                                                                                                                           //pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
-                            arrayPiezas[max - 2].pos = casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero);//nunca tiene que ser -1
+                                                                                                                         //pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
+                            arrayPiezas[max - 2].pos.fila = (int)(casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero)).fila;//nunca tiene que ser -1
+                            arrayPiezas[max - 2].pos.columna = (int)(casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero)).columna;//nunca tiene que ser -1
+
                             pos_piezas.LiberarPieza(max);
                             pos_piezas.tablero[arrayPiezas[max - 2].pos.fila, arrayPiezas[max - 2].pos.columna] = (int)arrayPiezas[max - 2].tipoPieza;
                             casillas_amenazadas.InicializarMatrizEn0();
@@ -129,6 +149,9 @@ namespace tp_2_labo_prueba
                             casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
                             //movi la pieza y reamenace todo
                             casillas_amenazadas.ChequeoCasillerosLibres();
+                            pos_piezas.ImprimirTablero();
+                            Console.WriteLine("\nTablero chequeo:\n");
+                            casillas_amenazadas.ImprimirTablero();
                             if (casillas_amenazadas.casillas_no_amenazadas == 0)
                             {
                                 cant_tab_generados++;
