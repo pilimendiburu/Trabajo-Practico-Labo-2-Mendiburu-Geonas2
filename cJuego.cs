@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace tp_2_labo_prueba
 {
 
@@ -14,7 +15,7 @@ namespace tp_2_labo_prueba
         cTablero pos_piezas;
         Amenazas cant_amenazasxCasillas;
         cTablero matrizFatales;
-        cTablero[] Tableros;
+        cPosicion[,] Tableros;
         //int[,] cuartoTablero=new int[4,4];
 
         public Pieza[] arrayPiezas;
@@ -92,6 +93,7 @@ namespace tp_2_labo_prueba
                 casillas_amenazadas.ChequeoCasillerosLibres();
                 if (casillas_amenazadas.casillas_no_amenazadas == 0&&ChequearTablero()==true)//no deberia pasar porque no estan todas las fichass
                 {
+                    copiarPosiciones();
                     cant_tab_generados++;
                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                     pos_piezas.ImprimirTablero();
@@ -125,6 +127,7 @@ namespace tp_2_labo_prueba
                     casillas_amenazadas.ChequeoCasillerosLibres();
                     if (casillas_amenazadas.casillas_no_amenazadas == 0&&ChequearTablero()==true)
                     {
+                        copiarPosiciones();
                         cant_tab_generados++;
                         Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                         pos_piezas.ImprimirTablero();
@@ -139,6 +142,7 @@ namespace tp_2_labo_prueba
                         if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                         {
                             //copiar matriz
+                            copiarPosiciones();
                             cant_tab_generados++;
                             Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                             pos_piezas.ImprimirTablero();
@@ -150,6 +154,8 @@ namespace tp_2_labo_prueba
                             casillas_amenazadas.ChequeoCasillerosLibres();
                             if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                             {
+                                copiarPosiciones();
+
                                 cant_tab_generados++;
                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                 pos_piezas.ImprimirTablero();
@@ -161,6 +167,8 @@ namespace tp_2_labo_prueba
                                 casillas_amenazadas.ChequeoCasillerosLibres();
                                 if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                 {
+                                    copiarPosiciones();
+
                                     cant_tab_generados++;
                                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                     pos_piezas.ImprimirTablero();
@@ -172,6 +180,8 @@ namespace tp_2_labo_prueba
                                     casillas_amenazadas.ChequeoCasillerosLibres();
                                     if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                     {
+                                        copiarPosiciones();
+
                                         cant_tab_generados++;
                                         Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                         pos_piezas.ImprimirTablero();
@@ -183,6 +193,8 @@ namespace tp_2_labo_prueba
                                         casillas_amenazadas.ChequeoCasillerosLibres();
                                         if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                         {
+                                            copiarPosiciones();
+
                                             cant_tab_generados++;
                                             Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                             pos_piezas.ImprimirTablero();
@@ -194,6 +206,8 @@ namespace tp_2_labo_prueba
                                             casillas_amenazadas.ChequeoCasillerosLibres();
                                             if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                             {
+                                                copiarPosiciones();
+
                                                 cant_tab_generados++;
                                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                                 pos_piezas.ImprimirTablero();
@@ -249,6 +263,8 @@ namespace tp_2_labo_prueba
                             //TAL VEZ NOS CONVIENE HACER INTERCAMBIOS ACA TAMBIEN -> en una de esas hace un tablero
                             if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                             {
+                                copiarPosiciones();
+
                                 cant_tab_generados++;
                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                 pos_piezas.ImprimirTablero();
@@ -260,6 +276,8 @@ namespace tp_2_labo_prueba
                                 casillas_amenazadas.ChequeoCasillerosLibres();
                                 if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                 {
+                                    copiarPosiciones();
+
                                     cant_tab_generados++;
                                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                     pos_piezas.ImprimirTablero();
@@ -271,6 +289,8 @@ namespace tp_2_labo_prueba
                                     casillas_amenazadas.ChequeoCasillerosLibres();
                                     if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                     {
+                                        copiarPosiciones();
+
                                         cant_tab_generados++;
                                         Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                         pos_piezas.ImprimirTablero();
@@ -282,6 +302,8 @@ namespace tp_2_labo_prueba
                                         casillas_amenazadas.ChequeoCasillerosLibres();
                                         if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                         {
+                                            copiarPosiciones();
+
                                             cant_tab_generados++;
                                             Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                             pos_piezas.ImprimirTablero();
@@ -294,6 +316,8 @@ namespace tp_2_labo_prueba
                                             casillas_amenazadas.ChequeoCasillerosLibres();
                                             if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                             {
+                                                copiarPosiciones();
+
                                                 cant_tab_generados++;
                                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                                 pos_piezas.ImprimirTablero();
@@ -305,6 +329,8 @@ namespace tp_2_labo_prueba
                                                 casillas_amenazadas.ChequeoCasillerosLibres();
                                                 if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                                 {
+                                                    copiarPosiciones();
+
                                                     cant_tab_generados++;
                                                     Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                                     pos_piezas.ImprimirTablero();
@@ -316,6 +342,8 @@ namespace tp_2_labo_prueba
                                                     casillas_amenazadas.ChequeoCasillerosLibres();
                                                     if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                                                     {
+                                                        copiarPosiciones();
+
                                                         cant_tab_generados++;
                                                         Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                                         pos_piezas.ImprimirTablero();
@@ -348,12 +376,7 @@ namespace tp_2_labo_prueba
             cant_amenazasxCasillas = new Amenazas();
             arrayPiezas = new Pieza[8];//yo recibiria una por parametro
             matrizFatales=new cTablero();
-            Tableros = new cTablero[cant_tableros_a_generar];
-            for (int i = 0; i < cant_tableros_a_generar; i++)
-            {
-                Tableros[i] = null;
-            }
-
+            Tableros = new cPosicion[cant_tableros_a_generar,8];
         }
         public void InicializarTableroAlfil()
         {
@@ -529,12 +552,31 @@ namespace tp_2_labo_prueba
                 }
             }
         }
-        public bool ChequearTablero() { 
-
-
-            return true;
+        public bool ChequearTablero() {
+         
+            int contador = 0;
+            for (int i = 0; i < pos_piezas.tablero.GetLength(0); i++)
+            {
+                for (int j = 0; j < pos_piezas.tablero.GetLength(1); j++)
+                {
+                    if (arrayPiezas[i].pos.fila == Tableros[j, i].fila && arrayPiezas[i].pos.columna == Tableros[j, i].columna)//hago variar la fila (osea el tablero) 
+                        contador++;
+                }
+            }
+            if (contador == 64)
+                return false;
+            else
+                return true;
         }
-          
+        public void copiarPosiciones()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Tableros[cant_tab_generados, i].fila = arrayPiezas[i].pos.fila;
+                Tableros[cant_tab_generados, i].columna = arrayPiezas[i].pos.columna;
+
+            }
+        }
     }
     
 }
