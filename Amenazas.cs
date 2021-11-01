@@ -541,7 +541,7 @@ namespace tp_2_labo_prueba
                     for (int j = 0; j < 8; j++)
                     {
                         while (pos_piezas.tablero[i, j] == 0)
-                            matriz_Fatales[i, j] = (int)pieza.tipoPieza;
+                            matriz_Fatales.tablero[i, j] = (int)pieza.tipoPieza;
                     }
                 }
             }

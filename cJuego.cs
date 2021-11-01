@@ -128,6 +128,93 @@ namespace tp_2_labo_prueba
                         Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                         pos_piezas.ImprimirTablero();
                         casillas_amenazadas.ImprimirTablero();
+                        //ACA TAMBIEN TENDRIAMOS QUE ROTAR EL TABLERO!!
+                        //---------------------------------------------------------------------
+                        IntercambiarCuartoTablero(1, 2);
+                        cant_amenazasxCasillas.InicializarMatrizEn0();
+                        casillas_amenazadas.InicializarMatrizEn0();
+                        casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                        if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                        {
+                            cant_tab_generados++;
+                            Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                            pos_piezas.ImprimirTablero();
+                            casillas_amenazadas.ImprimirTablero();
+                        }
+                        else
+                        {
+                            IntercambiarCuartoTablero(2, 3);
+                            cant_amenazasxCasillas.InicializarMatrizEn0();
+                            casillas_amenazadas.InicializarMatrizEn0();
+                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                            if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                            {
+                                cant_tab_generados++;
+                                Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                pos_piezas.ImprimirTablero();
+                                casillas_amenazadas.ImprimirTablero();
+                            }
+                            else
+                            {
+                                IntercambiarCuartoTablero(3, 4);
+                                cant_amenazasxCasillas.InicializarMatrizEn0();
+                                casillas_amenazadas.InicializarMatrizEn0();
+                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                {
+                                    cant_tab_generados++;
+                                    Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                    pos_piezas.ImprimirTablero();
+                                    casillas_amenazadas.ImprimirTablero();
+                                }
+                                else
+                                {
+                                    IntercambiarCuartoTablero(1, 4);
+                                    cant_amenazasxCasillas.InicializarMatrizEn0();
+                                    casillas_amenazadas.InicializarMatrizEn0();
+                                    casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                    if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                    {
+                                        cant_tab_generados++;
+                                        Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                        pos_piezas.ImprimirTablero();
+                                        casillas_amenazadas.ImprimirTablero();
+
+                                    }
+                                    else
+                                    {
+                                        IntercambiarCuartoTablero(1, 3);
+                                        cant_amenazasxCasillas.InicializarMatrizEn0();
+                                        casillas_amenazadas.InicializarMatrizEn0();
+                                        casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                        if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                        {
+                                            cant_tab_generados++;
+                                            Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                            pos_piezas.ImprimirTablero();
+                                            casillas_amenazadas.ImprimirTablero();
+
+                                        }
+                                        else
+                                        {
+                                            IntercambiarCuartoTablero(4, 2);
+                                            cant_amenazasxCasillas.InicializarMatrizEn0();
+                                            casillas_amenazadas.InicializarMatrizEn0();
+                                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                            if (casillas_amenazadas.casillas_no_amenazadas == 0)
+                                            {
+                                                cant_tab_generados++;
+                                                Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                                pos_piezas.ImprimirTablero();
+                                                casillas_amenazadas.ImprimirTablero();
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //----------------------------------------------------------------------
                     }
                     else
                     {
@@ -135,7 +222,7 @@ namespace tp_2_labo_prueba
                         while (contador < 5)
                         {
 
-                            //Busco la poscion mas amenazada
+                            //Busco donde esta la pieza con la poscion mas amenazada
                             cant_amenazasxCasillas.retornoMax();
                             int max = casillas_amenazadas.tablero[cant_amenazasxCasillas.pos_max_amenazas.fila, cant_amenazasxCasillas.pos_max_amenazas.columna];//el valor de la pieza en el mas amenazas
                                                                                                                          //pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
@@ -152,6 +239,7 @@ namespace tp_2_labo_prueba
                             pos_piezas.ImprimirTablero();
                             Console.WriteLine("\nTablero chequeo:\n");
                             casillas_amenazadas.ImprimirTablero();
+                            //TAL VEZ NOS CONVIENE HACER INTERCAMBIOS ACA TAMBIEN -> en una de esas hace un tablero
                             if (casillas_amenazadas.casillas_no_amenazadas == 0)
                             {
                                 cant_tab_generados++;
@@ -305,7 +393,7 @@ namespace tp_2_labo_prueba
                             }
                         }
                         return cuartoTablero;
-                        break;
+                        //break;
                     }                 
                 case 2://2ndo cuarto
                     {
@@ -317,7 +405,7 @@ namespace tp_2_labo_prueba
                             }
                         }
                         return cuartoTablero;
-                        break;
+                        //break;
                     }
                 case 3://3ercuarto
                     {
@@ -329,7 +417,7 @@ namespace tp_2_labo_prueba
                             }
                         }
                         return cuartoTablero;
-                        break;
+                        //break;
                     }
                 case 4:// 4to cuarto
                     {
@@ -341,7 +429,7 @@ namespace tp_2_labo_prueba
                             }
                         }
                         return cuartoTablero;
-                        break;
+                        //break;
                     }
                 default:
                     return cuartoTablero;
