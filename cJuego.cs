@@ -590,6 +590,69 @@ namespace tp_2_labo_prueba
 
             }
         }
+        public int tableroMinAmenazas()
+        {
+                int[] cont=new int [4];
+                for(int i=0;i<4;i++)
+                {
+                   cont[i]=0;
+                }
+                int cuartoMinAmenazas=0;
+
+                //primer cuarto
+                for(int i=0;i<4;i++)
+                {
+                    for(int j=0;j<4;j++)
+                    {
+                         if(casillas_amenazadas.tablero[i,j]==0)
+                           cont[0]++;
+                    }
+                }
+
+                //segundo cuarto
+                for(int i=0;i<4;i++)
+                {
+                    for(int j=4;j<8;j++)
+                    {
+                        if(casillas_amenazadas.tablero[i,j]==0)
+                            cont[1]++;
+                    }
+                }
+
+                //tercer cuarto
+                for(int i=4;i<8;i++)
+                {
+                    for(int j=0;j<4;j++)
+                    {
+                         if(casillas_amenazadas.tablero[i,j]==0)
+                             cont[2];
+                    }
+                }
+
+                //cuarto cuarto
+                for(int i=4;i<8;i++)
+                {
+                    for(int j=4;j<8;j++)
+                    {
+                         if(casillas_amenazadas.tablero[i,j]==0)
+                             cont[3]++;
+                    }
+                }
+
+                //busco el cuarto con menor amenazas
+                int min=cont[0];
+                for(int i=0;i<4;i++)
+                {
+                    if(cont[i]<min)
+                    {
+                         min=cont[i];
+                         cuartoMinAmenazas=i;
+                    }
+                }
+                 return cuartoMinAmenazas;
+                
+        }
+
     }
     
 }
