@@ -221,14 +221,10 @@ namespace tp_2_labo_prueba
                         }
                         //----------------------------------------------------------------------
                     }
-                    if (casillas_amenazadas.casillas_no_amenazadas == 0)
-                    {
-                         //Console.WriteLine("\nUpsss");
-                        //comienzo el for
-                    }
                     else
                     {
                         int contador = 0;
+                        //que hago cuando tengo el tablero y esta repetido?->muevo una pieza al azar y desconfiguro todo?
                         if (casillas_amenazadas.casillas_no_amenazadas == 0)
                             {
                                 Console.WriteLine("\nUpsss");
