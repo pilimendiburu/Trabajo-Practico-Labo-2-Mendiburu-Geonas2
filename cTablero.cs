@@ -15,7 +15,7 @@ namespace tp_2_labo_prueba
         public int[,] tablero = new int[8, 8];        
         //metodos:
 
-        public cPosicion LiberarPieza(int pieza) {
+        public void LiberarPieza(int pieza) {
             cPosicion p_pieza = new cPosicion();
             for (int i = 0; i < 8; i++)
             {
@@ -26,11 +26,9 @@ namespace tp_2_labo_prueba
                         p_pieza.fila = i;
                         p_pieza.columna = j;
                         tablero[i, j] = 0;
-                        return p_pieza;
                     }
                 }
             }
-            return p_pieza;//retorna -1
         }
         public cTablero()
         {
