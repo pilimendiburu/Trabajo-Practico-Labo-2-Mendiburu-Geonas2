@@ -377,6 +377,13 @@ namespace tp_2_labo_prueba
             arrayPiezas = new Pieza[8];//yo recibiria una por parametro
             matrizFatales=new cTablero();
             Tableros = new cPosicion[cant_tableros_a_generar,8];
+            for (int i = 0; i < cant_tableros_a_generar; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Tableros[i, j] = new cPosicion();
+                }
+            }
         }
         public void InicializarTableroAlfil()
         {
@@ -559,6 +566,8 @@ namespace tp_2_labo_prueba
             {
                 for (int j = 0; j < pos_piezas.tablero.GetLength(1); j++)
                 {
+                    if (i == 0)
+                        return true;
                     if (arrayPiezas[i].pos.fila == Tableros[j, i].fila && arrayPiezas[i].pos.columna == Tableros[j, i].columna)//hago variar la fila (osea el tablero) 
                         contador++;
                 }
@@ -572,8 +581,12 @@ namespace tp_2_labo_prueba
         {
             for (int i = 0; i < 8; i++)
             {
-                Tableros[cant_tab_generados, i].fila = arrayPiezas[i].pos.fila;
-                Tableros[cant_tab_generados, i].columna = arrayPiezas[i].pos.columna;
+                if (cant_tableros_a_generar < 10)
+                {
+
+                    Tableros[cant_tab_generados, i].fila = arrayPiezas[i].pos.fila;
+                    Tableros[cant_tab_generados, i].columna = arrayPiezas[i].pos.columna;
+                }
 
             }
         }
