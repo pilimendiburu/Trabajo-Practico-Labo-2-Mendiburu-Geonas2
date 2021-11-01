@@ -115,7 +115,7 @@ namespace tp_2_labo_prueba
                     }
                 }
             }
-            ImprimirTablero();
+            //ImprimirTablero();
             //complete dos veces la matriz con 1 en la posicion propuesta
             Amz_x_Cas[pieza.pos.fila, pieza.pos.columna] -= 1;
         }
