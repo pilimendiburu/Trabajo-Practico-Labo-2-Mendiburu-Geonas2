@@ -219,9 +219,9 @@ namespace tp_2_labo_prueba
         {
             //int cont = 0;
             cPosicion pos = new cPosicion();
-            for (int i = r1; i < 8-r1; i++)
+            for (int i = r1; i < r1+4; i++)
             {
-                for (int j = r2; j < 8-r2; j++)
+                for (int j = r2; j < r2+4; j++)
                 {
                     if (tablero[i, j] == 0)
                     {
@@ -332,51 +332,7 @@ namespace tp_2_labo_prueba
             }
             tablero[pieza.pos.fila, pieza.pos.columna] = (int)pieza.tipoPieza;
         }
-        //public void BuscarYdesamenazar_porPieza(int[,] Amz_x_Cas, Pieza pieza, int[,] pos_piezas)
-        //{
-        //    cPosicion pos = new cPosicion();
-        //    for (int i = 0; i < 8; i++)
-        //    {
-        //        for (int j = 0; j < 8; j++)
-        //        {
-        //            if ((int)pieza.tipoPieza == pos_piezas[i, j])
-        //            {
-        //                pos.fila = i;
-        //                pos.columna = j;
-        //            }
-        //        }
-        //    }
-        //    switch (pieza.tipoPieza)
-        //    {
-        //        case e_Pieza.CABALLO1:
-        //            AmenazasMovimientoCaballos(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.CABALLO2:
-        //            AmenazasMovimientoCaballos(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.TORRE1:
-        //            AmenazasMovimientoTorre(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.TORRE2:
-        //            AmenazasMovimientoTorre(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.ALFIL1:
-        //            AmenazasMovimientoAlfil(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.ALFIL2:
-        //            AmenazasMovimientoAlfil(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.REINA:
-        //            AmenazasMovimientoReina(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        case e_Pieza.REY:
-        //            AmenazasMovimientoRey(Amz_x_Cas, pos_piezas, pieza, false);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-
-        //  }
+       
         public void AmenazarTablero(int[,] Amz_x_Cas, int[,] pos_piezas, Pieza[] piezas, bool sumar) {
 
             for (int i = 0; i < 8; i++)

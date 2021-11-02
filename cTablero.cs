@@ -22,10 +22,9 @@ namespace tp_2_labo_prueba
                 for (int j = 0; j < 8; j++)
                 {
                     if (pieza == tablero[i, j])
-                    {
-                        p_pieza.fila = i;
-                        p_pieza.columna = j;
+                    {      
                         tablero[i, j] = 0;
+                        return;
                     }
                 }
             }
