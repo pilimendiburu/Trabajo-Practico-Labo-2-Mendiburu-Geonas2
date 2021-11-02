@@ -134,7 +134,7 @@ namespace tp_2_labo_prueba
                         casillas_amenazadas.ImprimirTablero();
                         //ACA TAMBIEN TENDRIAMOS QUE ROTAR EL TABLERO!!
                         //---------------------------------------------------------------------
-                        IntercambiarCuartoTablero(1, 2);
+                       /* IntercambiarCuartoTablero(1, 2);
                         cant_amenazasxCasillas.InicializarMatrizEn0();
                         casillas_amenazadas.InicializarMatrizEn0();
                         casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
@@ -219,26 +219,13 @@ namespace tp_2_labo_prueba
                                 }
                             }
                         }
-                        //----------------------------------------------------------------------
-                    }
-                    if (casillas_amenazadas.casillas_no_amenazadas == 0)
-                    {
-                         //Console.WriteLine("\nUpsss");
-                        //comienzo el for
+                     */   //----------------------------------------------------------------------
                     }
                     else
                     {
                         int contador = 0;
-                        if (casillas_amenazadas.casillas_no_amenazadas == 0)
-                            {
-                                Console.WriteLine("\nUpsss");
-                            }
                         while (contador < 5)
                         {
-                            if (casillas_amenazadas.casillas_no_amenazadas == 0)
-                            {
-                                Console.WriteLine("\nUpsss");
-                            }
                             //Busco donde esta la pieza con la poscion mas amenazada
                             cant_amenazasxCasillas.retornoMax();
                             int max = casillas_amenazadas.tablero[cant_amenazasxCasillas.pos_max_amenazas.fila, cant_amenazasxCasillas.pos_max_amenazas.columna];//el valor de la pieza en el mas amenazas
@@ -269,7 +256,7 @@ namespace tp_2_labo_prueba
                                 Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
                                 pos_piezas.ImprimirTablero();
                                 casillas_amenazadas.ImprimirTablero();
-                                IntercambiarCuartoTablero(1, 2);
+                               /* IntercambiarCuartoTablero(1, 2);
                                 cant_amenazasxCasillas.InicializarMatrizEn0();
                                 casillas_amenazadas.InicializarMatrizEn0();
                                 casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
@@ -354,7 +341,7 @@ namespace tp_2_labo_prueba
                                             }
                                         }
                                     }
-                                }
+                                }*/
                             
                             }
                             else
@@ -625,7 +612,7 @@ namespace tp_2_labo_prueba
                     for(int j=0;j<4;j++)
                     {
                          if(casillas_amenazadas.tablero[i,j]==0)
-                             cont[2];
+                             cont[2]++;
                     }
                 }
 
