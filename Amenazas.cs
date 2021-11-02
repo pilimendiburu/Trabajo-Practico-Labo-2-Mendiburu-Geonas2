@@ -215,13 +215,13 @@ namespace tp_2_labo_prueba
             AmenazasMovimientoTorre(Amz_x_Cas, pos_piezas, pieza, sumar);
             Amz_x_Cas[pieza.pos.fila, pieza.pos.columna] += 1;
         }
-        public cPosicion BuscarPosicionLibre(int pieza, Pieza[] arrayPiezas, int[,] matriz_alfil, bool rey = false)
+        public cPosicion BuscarPosicionLibre(int pieza, Pieza[] arrayPiezas, int[,] matriz_alfil, int r1,int r2, bool rey = false)
         {
             //int cont = 0;
             cPosicion pos = new cPosicion();
-            for (int i = 0; i < 8; i++)
+            for (int i = r1; i < 8-r1; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = r2; j < 8-r2; j++)
                 {
                     if (tablero[i, j] == 0)
                     {

@@ -23,7 +23,7 @@ namespace tp_2_labo_prueba
         {
             cant_tab_generados = 0;//ponco mi cantidad de tableros generados en 0
                                    //hago el while
-            
+
             while (cant_tab_generados < cant_tableros_a_generar)//-> necesito completar n tableros
             {
                 pos_piezas = new cTablero();//nuevo tablero, nuevas matrices
@@ -69,7 +69,7 @@ namespace tp_2_labo_prueba
                     aux.EleccionAlAzar();
                 }
                 pos_piezas.tablero[aux.fila, aux.columna] = 7;//alfil 2
-                arrayPiezas[5].pos.fila =(int)aux.fila;
+                arrayPiezas[5].pos.fila = (int)aux.fila;
                 arrayPiezas[5].pos.columna = (int)aux.columna;
 
                 casillas_amenazadas.AmenazasMovimientoAlfil(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[5], true);
@@ -91,7 +91,7 @@ namespace tp_2_labo_prueba
 
                 //para que no me salte un -1 chequeo que hayan posiciones libres
                 casillas_amenazadas.ChequeoCasillerosLibres();
-                if (casillas_amenazadas.casillas_no_amenazadas == 0&&ChequearTablero()==true)//no deberia pasar porque no estan todas las fichass
+                if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)//no deberia pasar porque no estan todas las fichass
                 {
                     copiarPosiciones();
                     cant_tab_generados++;
@@ -103,22 +103,25 @@ namespace tp_2_labo_prueba
                 {
                     //posicione todas las casillas al azar, ahora tengo que colocar donde encuentre una posicion vacia
                     //caballo1
-                    arrayPiezas[0].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;//pongo el caballo 1
-                    arrayPiezas[0].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;//pongo el caballo 1
+                    int[] cuartoMin = tableroMinAmenazas();
+                    arrayPiezas[0].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero,cuartoMin[0], cuartoMin[1])).fila;//pongo el caballo 1
+                    arrayPiezas[0].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[0].tipoPieza, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1])).columna;//pongo el caballo 1
 
                     pos_piezas.tablero[arrayPiezas[0].pos.fila, arrayPiezas[0].pos.columna] = 2;
                     casillas_amenazadas.AmenazasMovimientoCaballos(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[0], true);
 
                     //caballo2
-                    arrayPiezas[1].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;
-                    arrayPiezas[1].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;
+                    cuartoMin = tableroMinAmenazas();
+                    arrayPiezas[1].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1])).fila;
+                    arrayPiezas[1].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[1].tipoPieza, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1])).columna;
 
                     pos_piezas.tablero[arrayPiezas[1].pos.fila, arrayPiezas[1].pos.columna] = 3;
                     casillas_amenazadas.AmenazasMovimientoCaballos(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[1], true);
 
                     //rey
-                    arrayPiezas[7].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero)).fila;
-                    arrayPiezas[7].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero)).columna;
+                    cuartoMin = tableroMinAmenazas();
+                    arrayPiezas[7].pos.fila = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1])).fila;
+                    arrayPiezas[7].pos.columna = (int)(cant_amenazasxCasillas.BuscarPosicionLibre((int)arrayPiezas[7].tipoPieza, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1])).columna;
 
                     pos_piezas.tablero[arrayPiezas[7].pos.fila, arrayPiezas[7].pos.columna] = 9;
                     casillas_amenazadas.AmenazasMovimientoRey(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas[7], true);
@@ -227,27 +230,31 @@ namespace tp_2_labo_prueba
                         while (contador < 5)
                         {
                             //Busco donde esta la pieza con la poscion mas amenazada
-                            cant_amenazasxCasillas.retornoMax();
-                            int max = casillas_amenazadas.tablero[cant_amenazasxCasillas.pos_max_amenazas.fila, cant_amenazasxCasillas.pos_max_amenazas.columna];//el valor de la pieza en el mas amenazas
-                            cPosicion aux2 = new cPosicion();
-                            aux2.fila = (int)casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero).fila;//pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
-                            aux2.columna = (int)casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero).columna;//pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
-                           
-                            arrayPiezas[max - 2].pos.fila = (int)aux2.fila;//nunca tiene que ser -1
-                            arrayPiezas[max - 2].pos.columna = (int)aux2.columna;//nunca tiene que ser -1
+                            else
+                            {
+                                cant_amenazasxCasillas.retornoMax();
+                                int max = casillas_amenazadas.tablero[cant_amenazasxCasillas.pos_max_amenazas.fila, cant_amenazasxCasillas.pos_max_amenazas.columna];//el valor de la pieza en el mas amenazas
+                                cPosicion aux2 = new cPosicion();
+                                cuartoMin = tableroMinAmenazas();
+                                aux2.fila = (int)casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1]).fila;//pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
+                                aux2.columna = (int)casillas_amenazadas.BuscarPosicionLibre(max, arrayPiezas, matriz_alfil.tablero, cuartoMin[0], cuartoMin[1]).columna;//pongo la posicion de esa pieza en otro lugar libre, pongo la pieza en 0, marco el valor nuevo en el tablero y completo amenazas
+
+                                arrayPiezas[max - 2].pos.fila = (int)aux2.fila;//nunca tiene que ser -1
+                                arrayPiezas[max - 2].pos.columna = (int)aux2.columna;//nunca tiene que ser -1
 
 
-                            pos_piezas.LiberarPieza(max);
-                            pos_piezas.tablero[arrayPiezas[max - 2].pos.fila, arrayPiezas[max - 2].pos.columna] = (int)arrayPiezas[max - 2].tipoPieza;
-                            casillas_amenazadas.InicializarMatrizEn0();
-                            cant_amenazasxCasillas.InicializarMatrizEn0();
-                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
-                            //movi la pieza y reamenace todo
-                            casillas_amenazadas.ChequeoCasillerosLibres();
-                            // pos_piezas.ImprimirTablero();
-                            // Console.WriteLine("\nTablero chequeo:\n");
-                            // casillas_amenazadas.ImprimirTablero();
-                            //TAL VEZ NOS CONVIENE HACER INTERCAMBIOS ACA TAMBIEN -> en una de esas hace un tablero
+                                pos_piezas.LiberarPieza(max);
+                                pos_piezas.tablero[arrayPiezas[max - 2].pos.fila, arrayPiezas[max - 2].pos.columna] = (int)arrayPiezas[max - 2].tipoPieza;
+                                casillas_amenazadas.InicializarMatrizEn0();
+                                cant_amenazasxCasillas.InicializarMatrizEn0();
+                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                //movi la pieza y reamenace todo
+                                casillas_amenazadas.ChequeoCasillerosLibres();
+                                // pos_piezas.ImprimirTablero();
+                                // Console.WriteLine("\nTablero chequeo:\n");
+                                // casillas_amenazadas.ImprimirTablero();
+                                //TAL VEZ NOS CONVIENE HACER INTERCAMBIOS ACA TAMBIEN -> en una de esas hace un tablero
+                            }
                             if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
                             {
                                 copiarPosiciones();
@@ -362,8 +369,8 @@ namespace tp_2_labo_prueba
             pos_piezas = new cTablero();
             cant_amenazasxCasillas = new Amenazas();
             arrayPiezas = new Pieza[8];//yo recibiria una por parametro
-            matrizFatales=new cTablero();
-            Tableros = new cPosicion[cant_tableros_a_generar,8];
+            matrizFatales = new cTablero();
+            Tableros = new cPosicion[cant_tableros_a_generar, 8];
             for (int i = 0; i < cant_tableros_a_generar; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -394,14 +401,14 @@ namespace tp_2_labo_prueba
         public int[,] LlenarCuartoTablero(int cuarto)
         {
             int[,] cuartoTablero = new int[4, 4];
-            for(int i=0;i<4;i++)
+            for (int i = 0; i < 4; i++)
             {
-                for(int j=0;j<4; j++)
+                for (int j = 0; j < 4; j++)
                 {
                     cuartoTablero[i, j] = 0;
                 }
             }
-            switch(cuarto)
+            switch (cuarto)
             {
                 case 1:
                     {
@@ -414,14 +421,14 @@ namespace tp_2_labo_prueba
                         }
                         return cuartoTablero;
                         //break;
-                    }                 
+                    }
                 case 2://2ndo cuarto
                     {
                         for (int i = 0; i < cuartoTablero.GetLength(0); i++)
                         {
-                            for (int j = 4; j < 4+cuartoTablero.GetLength(1); j++)
+                            for (int j = 4; j < 4 + cuartoTablero.GetLength(1); j++)
                             {
-                                cuartoTablero[i, j-4] = pos_piezas.tablero[i, j];
+                                cuartoTablero[i, j - 4] = pos_piezas.tablero[i, j];
                             }
                         }
                         return cuartoTablero;
@@ -429,11 +436,11 @@ namespace tp_2_labo_prueba
                     }
                 case 3://3ercuarto
                     {
-                        for (int i = 4; i <4+ cuartoTablero.GetLength(0); i++)
+                        for (int i = 4; i < 4 + cuartoTablero.GetLength(0); i++)
                         {
                             for (int j = 0; j < cuartoTablero.GetLength(1); j++)
                             {
-                                cuartoTablero[i-4, j] = pos_piezas.tablero[i, j];
+                                cuartoTablero[i - 4, j] = pos_piezas.tablero[i, j];
                             }
                         }
                         return cuartoTablero;
@@ -443,9 +450,9 @@ namespace tp_2_labo_prueba
                     {
                         for (int i = 4; i < 4 + cuartoTablero.GetLength(0); i++)
                         {
-                            for (int j = 4; j <4+ cuartoTablero.GetLength(1); j++)
+                            for (int j = 4; j < 4 + cuartoTablero.GetLength(1); j++)
                             {
-                                cuartoTablero[i - 4, j-4] = pos_piezas.tablero[i, j];
+                                cuartoTablero[i - 4, j - 4] = pos_piezas.tablero[i, j];
                             }
                         }
                         return cuartoTablero;
@@ -454,7 +461,7 @@ namespace tp_2_labo_prueba
                 default:
                     return cuartoTablero;
             }
-          
+
 
         }
         public void IntercambiarCuartoTablero(int c1, int c2)
@@ -499,7 +506,7 @@ namespace tp_2_labo_prueba
                     }
                     break;
             }
-            PegarCuartosEnMatriz_Sol(cuarto1, R1, R2);
+            PegarCuartosEnMatriz_Sol(cuarto2, R1, R2);
 
             switch (c2)
             {
@@ -534,28 +541,35 @@ namespace tp_2_labo_prueba
                     }
                     break;
             }
-            PegarCuartosEnMatriz_Sol(cuarto2, R1, R2);
+            PegarCuartosEnMatriz_Sol(cuarto1, R1, R2);
         }
         public void PegarCuartosEnMatriz_Sol(int[,] cuarto, int R1, int R2)
         {
-            for(int i=R1; i<R1+4; i++)
+            for (int i = R1; i < R1 + 4; i++)
             {
-                for(int j=R2; j<R2+4; j++)
+                for (int j = R2; j < R2 + 4; j++)
                 {
-                    pos_piezas.tablero[i, j] =(int) cuarto[i - R1, j - R2];
+                    if (cuarto[i - R1, j - R2] != 0)
+                    {
+                        arrayPiezas[cuarto[i - R1, j - R2] - 2].pos.fila = i;
+                        arrayPiezas[cuarto[i - R1, j - R2] - 2].pos.columna = j;
+                    }
+
+                    pos_piezas.tablero[i, j] =cuarto[i - R1, j - R2];
                 }
             }
         }
-        public bool ChequearTablero() {
-         
+        public bool ChequearTablero()
+        {
+
             int contador = 0;
             for (int i = 0; i < pos_piezas.tablero.GetLength(0); i++)
             {
                 for (int j = 0; j < pos_piezas.tablero.GetLength(1); j++)
                 {
-                    if (i == 0)
+                    if (cant_tab_generados == 0)
                         return true;
-                    if (arrayPiezas[i].pos.fila == Tableros[j, i].fila && arrayPiezas[i].pos.columna == Tableros[j, i].columna)//hago variar la fila (osea el tablero) 
+                    if (arrayPiezas[i].pos.fila == (int)Tableros[j, i].fila && arrayPiezas[i].pos.columna ==(int) Tableros[j, i].columna)//hago variar la fila (osea el tablero) 
                         contador++;
                 }
             }
@@ -568,79 +582,208 @@ namespace tp_2_labo_prueba
         {
             for (int i = 0; i < 8; i++)
             {
-                if (cant_tableros_a_generar < 10)
+                if (cant_tab_generados < 10)
                 {
 
-                    Tableros[cant_tab_generados, i].fila = arrayPiezas[i].pos.fila;
-                    Tableros[cant_tab_generados, i].columna = arrayPiezas[i].pos.columna;
+                    Tableros[cant_tab_generados, i].fila = (int)arrayPiezas[i].pos.fila;
+                    Tableros[cant_tab_generados, i].columna = (int)arrayPiezas[i].pos.columna;
                 }
 
             }
         }
-        public int tableroMinAmenazas()
+        public int[] tableroMinAmenazas()
         {
-                int[] cont=new int [4];
-                for(int i=0;i<4;i++)
-                {
-                   cont[i]=0;
-                }
-                int cuartoMinAmenazas=0;
+            int[] rango = new int[2];
+            int[] cont = new int[4];
+            for (int i = 0; i < 4; i++)
+            {
+                cont[i] = 0;
+            }
+            int cuartoMinAmenazas = 0;
 
-                //primer cuarto
-                for(int i=0;i<4;i++)
+            //primer cuarto
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
                 {
-                    for(int j=0;j<4;j++)
-                    {
-                         if(casillas_amenazadas.tablero[i,j]==0)
-                           cont[0]++;
-                    }
+                    if (casillas_amenazadas.tablero[i, j] == 0)
+                        cont[0]++;
                 }
+            }
 
-                //segundo cuarto
-                for(int i=0;i<4;i++)
+            //segundo cuarto
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 4; j < 8; j++)
                 {
-                    for(int j=4;j<8;j++)
-                    {
-                        if(casillas_amenazadas.tablero[i,j]==0)
-                            cont[1]++;
-                    }
+                    if (casillas_amenazadas.tablero[i, j] == 0)
+                        cont[1]++;
                 }
+            }
 
-                //tercer cuarto
-                for(int i=4;i<8;i++)
+            //tercer cuarto
+            for (int i = 4; i < 8; i++)
+            {
+                for (int j = 0; j < 4; j++)
                 {
-                    for(int j=0;j<4;j++)
-                    {
-                         if(casillas_amenazadas.tablero[i,j]==0)
-                             cont[2]++;
-                    }
+                    if (casillas_amenazadas.tablero[i, j] == 0)
+                        cont[2]++;
                 }
+            }
 
-                //cuarto cuarto
-                for(int i=4;i<8;i++)
+            //cuarto cuarto
+            for (int i = 4; i < 8; i++)
+            {
+                for (int j = 4; j < 8; j++)
                 {
-                    for(int j=4;j<8;j++)
-                    {
-                         if(casillas_amenazadas.tablero[i,j]==0)
-                             cont[3]++;
-                    }
+                    if (casillas_amenazadas.tablero[i, j] == 0)
+                        cont[3]++;
                 }
+            }
 
-                //busco el cuarto con menor amenazas
-                int min=cont[0];
-                for(int i=0;i<4;i++)
+            //busco el cuarto con menor amenazas
+            int min = cont[0];
+            for (int i = 0; i < 4; i++)
+            {
+                if (cont[i] < min)
                 {
-                    if(cont[i]<min)
-                    {
-                         min=cont[i];
-                         cuartoMinAmenazas=i;
-                    }
+                    min = cont[i];
+                    cuartoMinAmenazas = i;
                 }
-                 return cuartoMinAmenazas;
-                
+            }
+            switch (cuartoMinAmenazas)
+            {
+                case 0:
+                    {
+                        rango[0] = 0;
+                        rango[1] = 0;
+                        break;
+                    }
+
+                case 1:
+                    {
+                        rango[0] = 0;
+                        rango[1] = 4;
+                        break;
+                    }
+                case 2:
+                    {
+                        rango[0] = 4;
+                        rango[1] = 0;
+                        break;
+                    }
+                case 3:
+                    {
+                        rango[0] = 4;
+                        rango[1] = 4;
+                        break;
+                    }
+
+                default:
+                    break;
+            }
+            return rango;
+
         }
 
+        public void TableroYaGenerado()
+        {
+          
+                copiarPosiciones();
+                cant_tab_generados++;
+                Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                pos_piezas.ImprimirTablero();
+                casillas_amenazadas.ImprimirTablero();
+                //ACA TAMBIEN TENDRIAMOS QUE ROTAR EL TABLERO!!
+                //---------------------------------------------------------------------
+                IntercambiarCuartoTablero(1, 2);
+                cant_amenazasxCasillas.InicializarMatrizEn0();
+                casillas_amenazadas.InicializarMatrizEn0();
+                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                casillas_amenazadas.ChequeoCasillerosLibres();
+                if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                {
+                    //copiar matriz
+                    copiarPosiciones();
+                    cant_tab_generados++;
+                    Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                    pos_piezas.ImprimirTablero();
+                    casillas_amenazadas.ImprimirTablero();
+                    IntercambiarCuartoTablero(2, 3);
+                    cant_amenazasxCasillas.InicializarMatrizEn0();
+                    casillas_amenazadas.InicializarMatrizEn0();
+                    casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                    casillas_amenazadas.ChequeoCasillerosLibres();
+                    if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                    {
+                        copiarPosiciones();
+
+                        cant_tab_generados++;
+                        Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                        pos_piezas.ImprimirTablero();
+                        casillas_amenazadas.ImprimirTablero();
+                        IntercambiarCuartoTablero(3, 4);
+                        cant_amenazasxCasillas.InicializarMatrizEn0();
+                        casillas_amenazadas.InicializarMatrizEn0();
+                        casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                        casillas_amenazadas.ChequeoCasillerosLibres();
+                        if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                        {
+                            copiarPosiciones();
+
+                            cant_tab_generados++;
+                            Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                            pos_piezas.ImprimirTablero();
+                            casillas_amenazadas.ImprimirTablero();
+                            IntercambiarCuartoTablero(1, 4);
+                            cant_amenazasxCasillas.InicializarMatrizEn0();
+                            casillas_amenazadas.InicializarMatrizEn0();
+                            casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                            casillas_amenazadas.ChequeoCasillerosLibres();
+                            if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                            {
+                                copiarPosiciones();
+
+                                cant_tab_generados++;
+                                Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                pos_piezas.ImprimirTablero();
+                                casillas_amenazadas.ImprimirTablero();
+                                IntercambiarCuartoTablero(1, 3);
+                                cant_amenazasxCasillas.InicializarMatrizEn0();
+                                casillas_amenazadas.InicializarMatrizEn0();
+                                casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                casillas_amenazadas.ChequeoCasillerosLibres();
+                                if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                                {
+                                    copiarPosiciones();
+
+                                    cant_tab_generados++;
+                                    Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                    pos_piezas.ImprimirTablero();
+                                    casillas_amenazadas.ImprimirTablero();
+                                    IntercambiarCuartoTablero(4, 2);
+                                    cant_amenazasxCasillas.InicializarMatrizEn0();
+                                    casillas_amenazadas.InicializarMatrizEn0();
+                                    casillas_amenazadas.AmenazarTablero(cant_amenazasxCasillas.tablero, pos_piezas.tablero, arrayPiezas, true);
+                                    casillas_amenazadas.ChequeoCasillerosLibres();
+                                    if (casillas_amenazadas.casillas_no_amenazadas == 0 && ChequearTablero() == true)
+                                    {
+                                        copiarPosiciones();
+
+                                        cant_tab_generados++;
+                                        Console.WriteLine("\nTengo tablero n°:" + cant_tab_generados);
+                                        pos_piezas.ImprimirTablero();
+                                        casillas_amenazadas.ImprimirTablero();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            
+
+        }
     }
-    
 }
 
